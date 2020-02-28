@@ -18,6 +18,7 @@ public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dpID", nullable = false, updatable = false)
+    @ApiModelProperty(notes = "Needed to Update an Employee | Not needed to create a new department")
     private Integer dpId;
 
     @Column(name = "dpName")

@@ -21,6 +21,7 @@ public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "empID", nullable = false, updatable = false)
+    @ApiModelProperty(example = "Not needed")
     private Integer empId;
 
     @Column(name = "empName")
