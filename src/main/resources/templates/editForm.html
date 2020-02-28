@@ -7,15 +7,15 @@
         <form th:Object="${empEdit}" action="#" th:action="@{/home/update/{empId}(empId=${empEdit.empId})}" method="POST" id="FormEdit">
             <table>
                 <tr>
-                    <td>empName: <input type="text" th:field="*{empName}"></td>
+                    <td>empName: <input type="text" th:field="*{empName}" id="empNameTxt" required></td>
                     <!--td th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}">Name Error</td-->
                 </tr>
                 <tr>
-                    <td>empActive: <input type="checkbox" th:field="*{empActive}" ></td>
+                    <td>empActive: <input type="checkbox" th:field="*{empActive}" id="empActiveTxt"></td>
                 </tr>
                 <tr>
                     <td>empDepartment:
-                        <select th:field="*{department}">
+                        <select th:field="*{department}" id="dpValue" required>
                             <option th:value="*{department.dpId}"
                                     th:text="*{department.dpName}"
                                     selected="selected">
@@ -27,9 +27,8 @@
                         </select>
                     </td>
                 </tr>
-                <tr id="formBtn">
-                    <td><input type="button" value="Save" class="btnSave"></td>
-                    <td><input type="button" value="Cancel" class="btnCancel"></td>
+                <tr>
+                    <td><input type="submit" value="Save" class="btnSave"></td>
                 </tr>
             </table>
         </form>

@@ -1,7 +1,6 @@
 const empList = document.getElementById('empList');
 const formBtn = document.getElementById('formBtn');
 const searchBtn = document.getElementById('searchName');
-//const formBtn = document.getElementById('cancel');
 const pageSize = document.getElementById('size');
 
 loadEventListeners();
@@ -69,9 +68,9 @@ function pagination(e){
 
 function buttons(e){
     e.preventDefault();
-    console.log(e.target.classList.contains('buttons'));
-
-/*    if(e.target.classList.contains('buttons')){
-        $('#editForm').load("/home/cancel");
-    }*/
+    if(e.target.classList.contains('btnCancel')){
+        document.getElementById('empNameTxt').value = "";
+        document.getElementById('empActiveTxt').checked = false;
+        document.getElementById('dpValue').selectedIndex = -1;
+    }
 }

@@ -20,11 +20,11 @@
         </div>
 
         <span>Amount of results:</span>
-            <select id="size">
-                <option value="10" class="getSize">10</option>
-                <option value="50" class="getSize">50</option>
-                <option value="100" class="getSize">100</option>
-            </select>
+        <select id="size">
+            <option value="10" class="getSize">10</option>
+            <option value="50" class="getSize">50</option>
+            <option value="100" class="getSize">100</option>
+        </select>
 
 
         <h4>Employee Details:</h4>
@@ -34,29 +34,35 @@
 
         <h4>Edit form:</h4>
         <section id="editForm">
-            <form>
+            <form id="FormEdit">
                 <table>
                     <tr>
-                        <td>empName: <input type="text"></td>
+                        <td>empName: <input type="text" id="empNameTxt" required></td>
                     </tr>
                     <tr>
-                        <td>empActive: <input type="checkbox"></td>
+                        <td>empActive: <input type="checkbox" id="empActiveTxt"></td>
                     </tr>
                     <tr>
                         <td>empDepartment:
-                            <select>
-                                <option>
+                            <select id="dpValue" required>
+                                <option></option>
+                                <option th:each="depart : ${departments}"
+                                        th:value="${depart.dpId}"
+                                        th:text="${depart.dpName}">
                                 </option>
                             </select>
                         </td>
                     </tr>
-                    <tr id="formBtn">
-                        <td><input type="button" value="Save" class="btnSave"></td>
-                        <td><input type="button" value="Cancel" class="btnCancel"></td>
+                    <tr>
+                        <td><input type="button" value="Save"></td>
                     </tr>
                 </table>
             </form>
         </section>
+
+        <span id="formBtn">
+            <input type="button" value="Cancel" class="btnCancel">
+        </span>
 
         <h4>Search employee by name:</h4>
         <section id="searchName">
