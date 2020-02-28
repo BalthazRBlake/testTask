@@ -13,7 +13,7 @@ import java.util.List;
 public class DepartmentResource {
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     @GetMapping("/")
     public List<Department> getAllDepartments(){

@@ -8,6 +8,10 @@ public interface EmployeeDao {
 
     List<Employee> findAllEmployees();
 
+    List<Employee> findAllPaginated(int currentEmpId, int limit);
+
+    Long countTotalEntries();
+
     List<Employee> findAllEmployeesNameStartsWith(String empName);
 
     Employee findEmployeeById(int empId);

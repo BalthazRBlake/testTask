@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org">
-      <!--th:replace="~{fragments/layout :: home (~{::section})}"-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8">
@@ -12,57 +11,67 @@
 </head>
 
 <body>
-    <section>
-
-        <!--section th:fragment="details"-->
-            <!--th:block th:insert="${view}"/-->
-        <!--/section-->
 
         <h1>SPA Employees</h1>
 
+        <h4>Grid view:</h4>
         <div id="empList">
-            <h3>Grid view:</h3>
             <section id="table"></section>
         </div>
 
-        <h3>Employee Details:</h3>
+        <span>Amount of results:</span>
+        <select id="size">
+            <option value="10" class="getSize">10</option>
+            <option value="50" class="getSize">50</option>
+            <option value="100" class="getSize">100</option>
+        </select>
+
+
+        <h4>Employee Details:</h4>
         <section id="empDetails">
             Employee details
         </section>
 
-        <h3>Edit form:</h3>
+        <h4>Edit form:</h4>
         <section id="editForm">
-            <form>
+            <form id="FormEdit">
                 <table>
                     <tr>
-                        <td>empName: <input type="text"></td>
+                        <td>empName: <input type="text" id="empNameTxt" required></td>
                     </tr>
                     <tr>
-                        <td>empActive: <input type="checkbox"></td>
+                        <td>empActive: <input type="checkbox" id="empActiveTxt"></td>
                     </tr>
                     <tr>
                         <td>empDepartment:
-                            <select>
-                                <option>
+                            <select id="dpValue" required>
+                                <option></option>
+                                <option th:each="depart : ${departments}"
+                                        th:value="${depart.dpId}"
+                                        th:text="${depart.dpName}">
                                 </option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td><input type="button" value="Save"></td>
-                        <td id="cancel"><input type="button" value="Cancel" class="buttons"></td>
                     </tr>
                 </table>
             </form>
         </section>
 
+        <span id="formBtn">
+            <input type="button" value="Cancel" class="btnCancel">
+        </span>
+
+        <h4>Search employee by name:</h4>
         <section id="searchName">
-            <h3>Search Employee Name:</h3>
-            <input type="text">
+            <input type="text" id="nameSearch">
             <a href="#" class="searchEmp">Search</a>
             <a href="#" class="reset">Reset</a>
         </section>
-    </section>
+
+        <h5><a href="/logout">Logout</a></h5>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>

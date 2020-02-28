@@ -7,6 +7,10 @@ import java.util.List;
 public interface EmployeeService {
     List<Employee> getAllEmployees();
 
+    List<Employee> getAllPaginated(int currentEmpId, int limit);
+
+    Long getTotalEntries();
+
     List<Employee> getAllEmpNameStartsWith(String empName);
 
     Employee getEmployeeById(int empId);

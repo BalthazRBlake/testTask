@@ -18,7 +18,7 @@ import java.util.Properties;
 class DatabaseConfig  {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

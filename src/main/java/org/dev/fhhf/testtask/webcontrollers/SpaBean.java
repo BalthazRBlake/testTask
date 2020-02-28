@@ -10,24 +10,38 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class SpaBean {
 
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
+
+    private int size = 10, page = 1;
 
     @GetMapping("/")
     public String home(Model model){
         Employee employee = new Employee();
-        model.addAttribute("searchName", employee);
+        //model.addAttribute("searchName", employee);
+        model.addAttribute("departments", departmentService.getAllDepartments());
         return "home";
     }
 
-    @GetMapping("/home")
-    public String fillTable(Model model){
-        model.addAttribute("employees", employeeService.getAllEmployees());
+    @GetMapping("/home/page/{page}/{size}")
+    public String fillTable(@PathVariable("page") int page,
+                            @PathVariable("size") int size, Model model){
+        List<Long> pages = new ArrayList<>();
+        double sizeD = size;
+        double countPages = Math.ceil( employeeService.getTotalEntries() / sizeD );
+        for(long i = 1; i <= countPages; i++){
+            pages.add(i);
+        }
+        model.addAttribute("pages", pages);
+        model.addAttribute("employees", employeeService.getAllPaginated(page, size));
         return "table :: empList";
     }
 
@@ -52,7 +66,6 @@ public class SpaBean {
         Department department = departmentService.getDepartmentById(dpId);
         employee.setDepartment(department);
         employeeService.updateEmployee(employee);
-        //model.addAttribute("employees", employeeService.getAllEmployees());
         //return "table :: empList";
         return "redirect:/";
     }
