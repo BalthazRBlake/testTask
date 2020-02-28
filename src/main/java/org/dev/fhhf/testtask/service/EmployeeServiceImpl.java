@@ -19,6 +19,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Employee> getAllPaginated(int page, int size) {
+        return employeeDao.findAllPaginated(page, size);
+    }
+
+    @Override
+    public Long getTotalEntries() {
+        return employeeDao.countTotalEntries();
+    }
+
+    @Override
     public List<Employee> getAllEmpNameStartsWith(String empName) {
         return employeeDao.findAllEmployeesNameStartsWith(empName);
     }

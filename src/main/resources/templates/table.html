@@ -5,6 +5,14 @@
 
     <section th:fragment="empList">
 
+        <ul id="menu">
+            <th:block th:each = "page : ${pages}">
+                <li style="display: inline">
+                    <a th:href="@{/home/page/{page}(page=${page})}" th:text = "${page}" class="currentPage"></a>
+                </li>
+            </th:block>
+        </ul>
+
         <table th:Object="${Employees}" border="1">
             <tr>
                 <th></th>
