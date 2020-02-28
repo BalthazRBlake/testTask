@@ -57,7 +57,8 @@ function searchEmployees(e){
         $('#table').load(url);
     }
     if(e.target.classList.contains('reset')){
-            $('#table').load("/home/page/1/10");
+        document.getElementById('nameSearch').value="";
+        $('#table').load("/home/page/1/10");
     }
 }
 
