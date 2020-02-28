@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <section th:fragment="details">
+            <label th:text="${empDetails.empId}"></label>
+            <label th:text="${empDetails.empName}"></label>
+            <label th:text="${empDetails.empActive}"></label>
+            <label th:text="${empDetails.department.dpName}"></label>
+    </section>
+</body>
+</html>

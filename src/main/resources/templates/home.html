@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+      <!--th:replace="~{fragments/layout :: home (~{::section})}"-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>FHHF :: TestTask</title>
+</head>
+
+<body>
+    <section>
+
+        <!--section th:fragment="details"-->
+            <!--th:block th:insert="${view}"/-->
+        <!--/section-->
+
+        <h1>SPA Employees</h1>
+
+        <div id="empList">
+            <h3>Grid view:</h3>
+            <section id="table"></section>
+        </div>
+
+        <h3>Employee Details:</h3>
+        <section id="empDetails">
+            Employee details
+        </section>
+
+        <h3>Edit form:</h3>
+        <section id="editForm">
+            <form>
+                <table>
+                    <tr>
+                        <td>empName: <input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>empActive: <input type="checkbox"></td>
+                    </tr>
+                    <tr>
+                        <td>empDepartment:
+                            <select>
+                                <option>
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="Save"></td>
+                        <td id="cancel"><input type="button" value="Cancel" class="buttons"></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+
+        <section id="searchName">
+            <h3>Search Employee Name:</h3>
+            <input type="text">
+            <a href="#" class="searchEmp">Search</a>
+            <a href="#" class="reset">Reset</a>
+        </section>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
+</body>
+</html>

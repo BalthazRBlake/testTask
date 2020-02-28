@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <section th:fragment="form">
+
+        <form th:Object="${empEdit}" action="#" th:action="@{/home/update/{empId}(empId=${empEdit.empId})}" method="POST" id="FormEdit">
+            <table>
+                <tr>
+                    <td>empName: <input type="text" th:field="*{empName}"></td>
+                    <!--td th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}">Name Error</td-->
+                </tr>
+                <tr>
+                    <td>empActive: <input type="checkbox" th:field="*{empActive}" ></td>
+                </tr>
+                <tr>
+                    <td>empDepartment:
+                        <select th:field="*{department}">
+                            <option th:value="*{department.dpId}"
+                                    th:text="*{department.dpName}"
+                                    selected="selected">
+                            </option>
+                            <option th:each="depart : ${departments}"
+                                    th:value="${depart.dpId}"
+                                    th:text="${depart.dpName}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Save"></td>
+                    <td id="cancel"><input type="button" value="Cancel" class="buttons"></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+</body>
+</html>
