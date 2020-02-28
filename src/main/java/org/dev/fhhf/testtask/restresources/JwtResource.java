@@ -24,7 +24,7 @@ public class JwtResource {
     @Autowired
     private TestTaskUserDetailService userDetailsService;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/api/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestModel authenticationRequest) throws Exception {
 
         try {
