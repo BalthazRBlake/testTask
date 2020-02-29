@@ -46,6 +46,29 @@ To attach your myFile.sql to the new schema run the following command:
 ```
 mysql -u myUser -p testtask < myFile.sql
 ```
-_**change myUser** for your user name we have (root) in application.properties and **change myFile.sql** for the file with data, you can find a testtask.sql file ready to use_
+_**change myUser** for your user name (we have **root** in application.properties) and **change myFile.sql** for the file with data, you can find a testtask.sql file ready to use_
 
+## Open the SPA
+Go to the address:
+> http://localhost:5000/
+You will be ask for **username = TestTask** and **passaword = TestTask**
 
+To navigate **RestAPI Swagger documentation** go to:
+> http://localhost:5000/swagger-ui.html
+
+To get the **JWT** make a **POST request** to:
+> http://localhost:5000/api/authenticate
+Enter the credentials:
+```
+{
+  "password": "TestTask",
+  "username": "TestTask"
+}
+```
+To send a REST API request set the header:
+> Authorization = FHHF "generated jwt"
+
+**change "generated jwt"** for the POST response from _ http://localhost:5000/api/authenticate _, it looks something like:
+>"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXNUYXNrIiwiZX"
+
+So, the final header value woudl be like **FHHF eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXNUYXNrIiwiZX**
