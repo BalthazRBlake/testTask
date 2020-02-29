@@ -71,4 +71,4 @@ To send a REST API request set the header:
 **change "generated jwt"** for the POST response from _ http://localhost:5000/api/authenticate _, it looks something like:
 >"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXNUYXNrIiwiZX"
 
-So, the final header value woudl be like **FHHF eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXNUYXNrIiwiZX**
+So, the final header value would be like **FHHF eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXNUYXNrIiwiZX**
