@@ -25,15 +25,17 @@ public class SpaBean {
 
     @GetMapping("/")
     public String home(Model model){
+
         Employee employee = new Employee();
-        //model.addAttribute("searchName", employee);
         model.addAttribute("departments", departmentService.getAllDepartments());
+
         return "home";
     }
 
     @GetMapping("/home/page/{page}/{size}")
     public String fillTable(@PathVariable("page") int page,
                             @PathVariable("size") int size, Model model){
+
         List<Long> pages = new ArrayList<>();
         double sizeD = size;
         double countPages = Math.ceil( employeeService.getTotalEntries() / sizeD );
@@ -42,48 +44,56 @@ public class SpaBean {
         }
         model.addAttribute("pages", pages);
         model.addAttribute("employees", employeeService.getAllPaginated(page, size));
+
         return "table :: empList";
     }
 
     @GetMapping("/home/details/{empId}")
     public String viewEmployeeDetails(@PathVariable("empId") int empId, Model model){
+
         Employee empDetails = employeeService.getEmployeeById(empId);
         model.addAttribute("empDetails", empDetails);
+
         return "empDetails :: details";
     }
 
     @GetMapping("/home/edit/{empId}")
     public String initEditForm(@PathVariable("empId") int empId, Model model){
+
         Employee employee = employeeService.getEmployeeById(empId);
         model.addAttribute("empEdit", employee);
         model.addAttribute("departments", departmentService.getAllDepartments());
+
         return "editForm :: form";
     }
 
-    @PostMapping("/home/update/{empId}")
-    public String updateEmployee(@PathVariable("empId") int empId, Employee employee, Model model){
+    @PostMapping("/home/update")
+    public String updateEmployee(Employee employee, Model model){
+
         int dpId = Integer.valueOf( employee.getDepartment().getDpName() );
         Department department = departmentService.getDepartmentById(dpId);
         employee.setDepartment(department);
         employeeService.updateEmployee(employee);
-        //return "table :: empList";
-        //return "redirect:/home/page/1/10";
-        return "redirect:/";
+
+        return "redirect:/home/page/1/10";
     }
 
     @GetMapping("/home/delete/{empId}")
     public String deleteEmployee(@PathVariable("empId") int empId, Model model){
+
         Employee delEmployee = new Employee(empId);
         employeeService.deleteEmployee(delEmployee);
         model.addAttribute("employees", employeeService.getAllEmployees());
-        //return "table :: empList";
+
         return "redirect:/home/page/1/10";
     }
 
     @GetMapping("/home/search/{name}")
     public String searchNameStartsWith(@PathVariable("name") String name, Model model){
+
         System.out.println("El nombre empieza por : " + name);
         model.addAttribute("employees", employeeService.getAllEmpNameStartsWith(name));
+
         return "table :: empList";
     }
 }

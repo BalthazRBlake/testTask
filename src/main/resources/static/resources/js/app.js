@@ -120,7 +120,26 @@ function pagination(e){
 function buttons(e){
     e.preventDefault();
     if(e.target.classList.contains('btnSave')){
-        document.getElementById('editEmpForm').submit();
+       var str = $("#editEmpForm").serialize();
+
+       $.ajax({
+           type:"post",
+           data:str,
+           url:"/home/update",
+           dataType: "json",
+           success: function(result){
+            console.log('Not getting success why?');
+            console.log(result.responseText);
+           },
+           error: function(result){
+           //console.log(result.responseText);
+           $('#table').html(result.responseText);
+           document.getElementById('empIdTxt').value = "";
+            document.getElementById('empNameTxt').value = "";
+            document.getElementById('empActiveTxt').checked = false;
+            document.getElementById('dpValue').selectedIndex = -1;
+           }
+       });
     }
     if(e.target.classList.contains('btnCancel')){
         document.getElementById('empNameTxt').value = "";
