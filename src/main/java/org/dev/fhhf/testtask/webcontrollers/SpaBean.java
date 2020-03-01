@@ -67,12 +67,8 @@ public class SpaBean {
         employee.setDepartment(department);
         employeeService.updateEmployee(employee);
         //return "table :: empList";
-        return "redirect:/home/page/1/10";//"redirect:/";
-    }
-
-    @GetMapping("/home/cancel")
-    public String cancelEditForm(){
-        return "resetForm :: form";
+        //return "redirect:/home/page/1/10";
+        return "redirect:/";
     }
 
     @GetMapping("/home/delete/{empId}")
