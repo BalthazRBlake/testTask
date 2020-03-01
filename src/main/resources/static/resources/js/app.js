@@ -31,7 +31,7 @@ function showDetails(e){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length);
-        $('#editForm').load(url);
+        $('#form').load(url);
      }
 
     if(e.target.classList.contains('deleteEmployee')){
@@ -69,6 +69,9 @@ function pagination(e){
 
 function buttons(e){
     e.preventDefault();
+    if(e.target.classList.contains('btnSave')){
+        document.getElementById('editEmpForm').submit();
+    }
     if(e.target.classList.contains('btnCancel')){
         document.getElementById('empNameTxt').value = "";
         document.getElementById('empActiveTxt').checked = false;
