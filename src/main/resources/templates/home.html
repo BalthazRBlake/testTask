@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FHHF :: TestTask</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
 </head>
 
 <body>
@@ -15,13 +17,14 @@
         <h1>SPA Employees</h1>
 
         <h4>Grid view:</h4>
-        <div id="empList">
-            <section id="table"></section>
-        </div>
+        <section id="empList">
+            <div id="table"></div>
+        </section>
 
         <span>Amount of results:</span>
         <select id="size">
             <option value="10" class="getSize">10</option>
+            <option value="25" class="getSize">25</option>
             <option value="50" class="getSize">50</option>
             <option value="100" class="getSize">100</option>
         </select>
@@ -29,12 +32,20 @@
 
         <h4>Employee Details:</h4>
         <section id="empDetails">
-            Employee details
+            <table>
+                <tr>
+                    <td>Id: , </td>
+                    <td>Name: , </td>
+                    <td>Active: , </td>
+                    <td>Department: </td>
+                </tr>
+            </table>
         </section>
 
         <h4>Edit form:</h4>
-        <section id="editForm">
-            <form id="FormEdit">
+        <section id="editEmpDetails">
+            <div id="form">
+            <form id="editEmpForm">
                 <table>
                     <tr>
                         <td>empName: <input type="text" id="empNameTxt" required></td>
@@ -53,14 +64,13 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <td><input type="button" value="Save"></td>
-                    </tr>
                 </table>
             </form>
+            </div>
         </section>
 
         <span id="formBtn">
+            <input type="submit" value="Save" class="btnSave">
             <input type="button" value="Cancel" class="btnCancel">
         </span>
 
@@ -73,7 +83,10 @@
 
         <h5><a href="/logout">Logout</a></h5>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script-->
+        <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

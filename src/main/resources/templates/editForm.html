@@ -4,7 +4,8 @@
 <body>
     <section th:fragment="form">
 
-        <form th:Object="${empEdit}" action="#" th:action="@{/home/update/{empId}(empId=${empEdit.empId})}" method="POST" id="FormEdit">
+        <form th:Object="${empEdit}" action="#"
+              th:action="@{/home/update/{empId}(empId=${empEdit.empId})}" method="POST" id="editEmpForm">
             <table>
                 <tr>
                     <td>empName: <input type="text" th:field="*{empName}" id="empNameTxt" required></td>
@@ -26,9 +27,6 @@
                             </option>
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Save" class="btnSave"></td>
                 </tr>
             </table>
         </form>
