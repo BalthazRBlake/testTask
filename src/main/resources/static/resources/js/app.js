@@ -10,7 +10,7 @@ function loadEventListeners(){
     empList.addEventListener('click', showDetails);
     searchBtn.addEventListener('click', searchEmployees);
     formBtn.addEventListener('click', buttons);
-    pageSize.addEventListener('click', pagination);
+    pageSize.addEventListener('change', pagination);
 }
 
 function loadTable(){
@@ -24,28 +24,57 @@ function showDetails(e){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length);
-        $('#empDetails').load(url);
+        /*$('#empDetails').load(url);*/
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(result){
+                $('#empDetails').html(result);
+            }
+        });
+
     }
 
     if(e.target.classList.contains('editEmployee')){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length);
-        $('#form').load(url);
+        //$('#form').load(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(result){
+                $('#form').html(result);
+            }
+        });
      }
 
     if(e.target.classList.contains('deleteEmployee')){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length);
-        $('#table').load(url);
+        //$('#table').load(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(result){
+                $('#table').html(result);
+            }
+        });
     }
 
     if(e.target.classList.contains('currentPage')){
-            let str = e.target.href;
-            let urlStarts = str.indexOf('/home');
-            let url = str.substring(urlStarts, str.length) + '/' + document.getElementById('size').value;
-            $('#table').load(url);
+        let str = e.target.href;
+        let urlStarts = str.indexOf('/home');
+        let url = str.substring(urlStarts, str.length) + '/' + document.getElementById('size').value;
+        //$('#table').load(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(result){
+                $('#table').html(result);
+            }
+        });
     }
 }
 
@@ -54,17 +83,38 @@ function searchEmployees(e){
 
     if(e.target.classList.contains('searchEmp')){
         let url = '/home/search/' + searchBtn.querySelector('input').value;
-        $('#table').load(url);
+        //$('#table').load(url);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(result){
+                $('#table').html(result);
+            }
+        });
     }
     if(e.target.classList.contains('reset')){
         document.getElementById('nameSearch').value="";
-        $('#table').load("/home/page/1/10");
+        //$('#table').load("/home/page/1/10");
+        $.ajax({
+            type: 'GET',
+            url: '/home/page/1/10',
+            success: function(result){
+                $('#table').html(result);
+            }
+        });
     }
 }
 
 function pagination(e){
     let url = '/home/page/1/' + document.getElementById('size').value;
-    $('#table').load(url);
+    //$('#table').load(url);
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function(result){
+            $('#table').html(result);
+        }
+    });
 }
 
 function buttons(e){

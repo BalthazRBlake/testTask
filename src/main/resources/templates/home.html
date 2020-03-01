@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FHHF :: TestTask</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
 </head>
 
 <body>
@@ -22,6 +24,7 @@
         <span>Amount of results:</span>
         <select id="size">
             <option value="10" class="getSize">10</option>
+            <option value="25" class="getSize">25</option>
             <option value="50" class="getSize">50</option>
             <option value="100" class="getSize">100</option>
         </select>
@@ -80,7 +83,10 @@
 
         <h5><a href="/logout">Logout</a></h5>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script-->
+        <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

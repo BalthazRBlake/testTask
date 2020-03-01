@@ -67,7 +67,7 @@ public class SpaBean {
         employee.setDepartment(department);
         employeeService.updateEmployee(employee);
         //return "table :: empList";
-        return "redirect:/";
+        return "redirect:/home/page/1/10";//"redirect:/";
     }
 
     @GetMapping("/home/cancel")
@@ -80,7 +80,8 @@ public class SpaBean {
         Employee delEmployee = new Employee(empId);
         employeeService.deleteEmployee(delEmployee);
         model.addAttribute("employees", employeeService.getAllEmployees());
-        return "table :: empList";
+        //return "table :: empList";
+        return "redirect:/home/page/1/10";
     }
 
     @GetMapping("/home/search/{name}")
