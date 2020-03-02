@@ -37,7 +37,8 @@ public class SpaBean {
     @GetMapping("/home/page/{page}/{size}")
     public String fillTable(@PathVariable("page") int page,
                             @PathVariable("size") int size, Model model){
-
+        this.page = page;
+        this.size = size;
         List<Long> pages = new ArrayList<>();
         double sizeD = size;
         double countPages = Math.ceil( employeeService.getTotalEntries() / sizeD );
@@ -45,7 +46,7 @@ public class SpaBean {
             pages.add(i);
         }
         model.addAttribute("pages", pages);
-        model.addAttribute("employees", employeeService.getAllPaginated(page, size));
+        model.addAttribute("employees", employeeService.getAllPaginated(this.page, this.size));
 
         return "table :: empList";
     }
@@ -88,7 +89,7 @@ public class SpaBean {
         model.addAttribute("empNameError", false);
         employeeService.updateEmployee(employee);
 
-        return "redirect:/home/page/1/10";
+        return "redirect:/home/page/" + page + "/" + size;
     }
 
     @GetMapping("/home/delete/{empId}")
@@ -98,7 +99,7 @@ public class SpaBean {
         employeeService.deleteEmployee(delEmployee);
         model.addAttribute("employees", employeeService.getAllEmployees());
 
-        return "redirect:/home/page/1/10";
+        return "redirect:/home/page/" + page + "/" + size;
     }
 
     @GetMapping("/home/search/{name}")
