@@ -8,8 +8,10 @@ import org.dev.fhhf.testtask.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,7 @@ public class SpaBean {
     @GetMapping("/home/edit/{empId}")
     public String initEditForm(@PathVariable("empId") int empId, Model model){
 
+        //model.addAttribute("empNameError", false);
         Employee employee = employeeService.getEmployeeById(empId);
         model.addAttribute("empEdit", employee);
         model.addAttribute("departments", departmentService.getAllDepartments());
@@ -67,12 +70,22 @@ public class SpaBean {
         return "editForm :: form";
     }
 
-    @PostMapping("/home/update")
-    public String updateEmployee(Employee employee, Model model){
+    @PostMapping("/home/update/{empId}")
+    public String updateEmployee(@PathVariable("empId") int empId, Employee employee, Model model){
 
+        employee.setEmpId(empId);
         int dpId = Integer.valueOf( employee.getDepartment().getDpName() );
         Department department = departmentService.getDepartmentById(dpId);
         employee.setDepartment(department);
+
+        if(employee.getEmpName().equals("")){
+            model.addAttribute("empNameError", true);
+            model.addAttribute("empEdit", employee);
+            model.addAttribute("departments", departmentService.getAllDepartments());
+            return "editForm :: form";
+        }
+
+        model.addAttribute("empNameError", false);
         employeeService.updateEmployee(employee);
 
         return "redirect:/home/page/1/10";
