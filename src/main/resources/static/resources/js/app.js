@@ -24,7 +24,6 @@ function showDetails(e){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length);
-        /*$('#empDetails').load(url);*/
         $.ajax({
             type: 'GET',
             url: url,
@@ -39,7 +38,6 @@ function showDetails(e){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length);
-        //$('#form').load(url);
         $.ajax({
             type: 'GET',
             url: url,
@@ -53,7 +51,6 @@ function showDetails(e){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length);
-        //$('#table').load(url);
         $.ajax({
             type: 'GET',
             url: url,
@@ -67,7 +64,6 @@ function showDetails(e){
         let str = e.target.href;
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length) + '/' + document.getElementById('size').value;
-        //$('#table').load(url);
         $.ajax({
             type: 'GET',
             url: url,
@@ -83,7 +79,6 @@ function searchEmployees(e){
 
     if(e.target.classList.contains('searchEmp')){
         let url = '/home/search/' + searchBtn.querySelector('input').value;
-        //$('#table').load(url);
         $.ajax({
             type: 'GET',
             url: url,
@@ -94,7 +89,6 @@ function searchEmployees(e){
     }
     if(e.target.classList.contains('reset')){
         document.getElementById('nameSearch').value="";
-        //$('#table').load("/home/page/1/10");
         $.ajax({
             type: 'GET',
             url: '/home/page/1/10',
@@ -107,7 +101,6 @@ function searchEmployees(e){
 
 function pagination(e){
     let url = '/home/page/1/' + document.getElementById('size').value;
-    //$('#table').load(url);
     $.ajax({
         type: 'GET',
         url: url,
@@ -118,23 +111,27 @@ function pagination(e){
 }
 
 function buttons(e){
+
     e.preventDefault();
     if(e.target.classList.contains('btnSave')){
-       var str = $("#editEmpForm").serialize();
+
+       let str = $("#editEmpForm").serialize();
+       let url = "/home/update/" + document.getElementById('empIdTxt').value;
 
        $.ajax({
            type:"post",
            data:str,
-           url:"/home/update",
+           url: url,
            success: function(result){
-            $('#table').html(result);
-            document.getElementById('empIdTxt').value = "";
-            document.getElementById('empNameTxt').value = "";
-            document.getElementById('empActiveTxt').checked = false;
-            document.getElementById('dpValue').selectedIndex = -1;
-           },
-           error: function(result){
-
+                if($(result).find('.hasError').length){
+                    $('#form').html(result);
+                }else{
+                    $('#table').html(result);
+                    document.getElementById('empIdTxt').value = "";
+                    document.getElementById('empNameTxt').value = "";
+                    document.getElementById('empActiveTxt').checked = false;
+                    document.getElementById('dpValue').selectedIndex = -1;
+                }
            }
        });
     }

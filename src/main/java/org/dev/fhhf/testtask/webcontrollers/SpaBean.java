@@ -8,8 +8,10 @@ import org.dev.fhhf.testtask.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,8 @@ public class SpaBean {
     @GetMapping("/home/page/{page}/{size}")
     public String fillTable(@PathVariable("page") int page,
                             @PathVariable("size") int size, Model model){
-
+        this.page = page;
+        this.size = size;
         List<Long> pages = new ArrayList<>();
         double sizeD = size;
         double countPages = Math.ceil( employeeService.getTotalEntries() / sizeD );
@@ -43,7 +46,7 @@ public class SpaBean {
             pages.add(i);
         }
         model.addAttribute("pages", pages);
-        model.addAttribute("employees", employeeService.getAllPaginated(page, size));
+        model.addAttribute("employees", employeeService.getAllPaginated(this.page, this.size));
 
         return "table :: empList";
     }
@@ -60,6 +63,7 @@ public class SpaBean {
     @GetMapping("/home/edit/{empId}")
     public String initEditForm(@PathVariable("empId") int empId, Model model){
 
+        //model.addAttribute("empNameError", false);
         Employee employee = employeeService.getEmployeeById(empId);
         model.addAttribute("empEdit", employee);
         model.addAttribute("departments", departmentService.getAllDepartments());
@@ -67,15 +71,25 @@ public class SpaBean {
         return "editForm :: form";
     }
 
-    @PostMapping("/home/update")
-    public String updateEmployee(Employee employee, Model model){
+    @PostMapping("/home/update/{empId}")
+    public String updateEmployee(@PathVariable("empId") int empId, Employee employee, Model model){
 
+        employee.setEmpId(empId);
         int dpId = Integer.valueOf( employee.getDepartment().getDpName() );
         Department department = departmentService.getDepartmentById(dpId);
         employee.setDepartment(department);
+
+        if(employee.getEmpName().equals("")){
+            model.addAttribute("empNameError", true);
+            model.addAttribute("empEdit", employee);
+            model.addAttribute("departments", departmentService.getAllDepartments());
+            return "editForm :: form";
+        }
+
+        model.addAttribute("empNameError", false);
         employeeService.updateEmployee(employee);
 
-        return "redirect:/home/page/1/10";
+        return "redirect:/home/page/" + page + "/" + size;
     }
 
     @GetMapping("/home/delete/{empId}")
@@ -85,7 +99,7 @@ public class SpaBean {
         employeeService.deleteEmployee(delEmployee);
         model.addAttribute("employees", employeeService.getAllEmployees());
 
-        return "redirect:/home/page/1/10";
+        return "redirect:/home/page/" + page + "/" + size;
     }
 
     @GetMapping("/home/search/{name}")
