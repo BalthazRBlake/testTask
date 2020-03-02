@@ -136,6 +136,7 @@ function buttons(e){
        });
     }
     if(e.target.classList.contains('btnCancel')){
+        document.querySelector('.hasError').innerHTML = "";
         document.getElementById('empIdTxt').value = "";
         document.getElementById('empNameTxt').value = "";
         document.getElementById('empActiveTxt').checked = false;
