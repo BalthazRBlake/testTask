@@ -3,6 +3,8 @@ const formBtn = document.getElementById('formBtn');
 const searchBtn = document.getElementById('searchName');
 const pageSize = document.getElementById('size');
 
+let page = 1;
+
 loadEventListeners();
 
 function loadEventListeners(){
@@ -14,7 +16,7 @@ function loadEventListeners(){
 }
 
 function loadTable(){
-    $('#table').load("/home/page/1/10");
+    $('#table').load('/home/page/' + page + '/' + document.getElementById('size').value);
 }
 
 function showDetails(e){
@@ -62,6 +64,10 @@ function showDetails(e){
 
     if(e.target.classList.contains('currentPage')){
         let str = e.target.href;
+
+        let iniPa = str.indexOf('ge/') + 3;
+        page = str.substring(iniPa, str.length);
+
         let urlStarts = str.indexOf('/home');
         let url = str.substring(urlStarts, str.length) + '/' + document.getElementById('size').value;
         $.ajax({
@@ -91,7 +97,7 @@ function searchEmployees(e){
         document.getElementById('nameSearch').value="";
         $.ajax({
             type: 'GET',
-            url: '/home/page/1/10',
+            url: '/home/page/' + page + '/' + document.getElementById('size').value,
             success: function(result){
                 $('#table').html(result);
             }
@@ -136,10 +142,12 @@ function buttons(e){
        });
     }
     if(e.target.classList.contains('btnCancel')){
-        document.querySelector('.hasError').innerHTML = "";
         document.getElementById('empIdTxt').value = "";
         document.getElementById('empNameTxt').value = "";
         document.getElementById('empActiveTxt').checked = false;
         document.getElementById('dpValue').selectedIndex = -1;
+
+        let error = document.querySelector('.hasError') === null ? false : true;
+        if(error) document.querySelector('.hasError').innerHTML = "";
     }
 }
