@@ -9,72 +9,47 @@
 
     <title>FHHF :: TestTask</title>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />
 </head>
 
 <body>
 
+<div class="container-fluid">
+    <div class="container">
         <h1>Single Page Application Employees</h1>
 
-        <h4>Grid view:</h4>
-        <section id="empList">
-            <div id="table"></div>
-        </section>
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Grid view:</h4>
+                <section id="empList">
+                    <div id="table"></div>
+                </section>
 
-        <span>Amount of results:</span>
-        <select id="size">
-            <option value="10" class="getSize">10</option>
-            <option value="25" class="getSize">25</option>
-            <option value="50" class="getSize">50</option>
-            <option value="100" class="getSize">100</option>
-        </select>
+                <div class="form-group">
+                    <span class="badge badge-dark">Amount of results:</span>
+                    <select id="size">
+                        <option value="10" class="getSize">10</option>
+                        <option value="25" class="getSize">25</option>
+                        <option value="50" class="getSize">50</option>
+                        <option value="100" class="getSize">100</option>
+                    </select>
+                </div>
+            </div>
 
-
-        <h4>Employee Details:</h4>
-        <section id="empDetails">
-            <table>
-                <tr>
-                    <td>Id: , </td>
-                    <td>Name: , </td>
-                    <td>Active: , </td>
-                    <td>Department: </td>
-                </tr>
-            </table>
-        </section>
+            <div class="col-md-5">
+                <h6>Employee Details:</h6>
+                <section id="empDetails">
+                </section>
 
         <h4>Edit form:</h4>
         <section id="editEmpDetails">
-            <div id="form">
-            <form id="editEmpForm">
-                <table>
-                    <tr>
-                        <td><input type="hidden" id="empIdTxt"></td>
-                    </tr>
-                    <tr>
-                        <td>empName: <input type="text" id="empNameTxt"></td>
-                    </tr>
-                    <tr>
-                        <td>empActive: <input type="checkbox" id="empActiveTxt"></td>
-                    </tr>
-                    <tr>
-                        <td>empDepartment:
-                            <select id="dpValue" required>
-                                <option></option>
-                                <option th:each="depart : ${departments}"
-                                        th:value="${depart.dpId}"
-                                        th:text="${depart.dpName}">
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            </div>
+            <div id="form"></div>
         </section>
 
         <span id="formBtn">
-            <input type="submit" value="Save" class="btnSave">
+            <input type="submit" value="Update" class="btnSave">
             <input type="button" value="Cancel" class="btnCancel">
+            <input type="submit" value="New Employee" class="btnNew">
         </span>
 
         <h4>Search employee by name:</h4>
@@ -85,7 +60,11 @@
         </section>
 
         <h5><a href="/logout">Logout</a></h5>
+            </div>
+        </div>
 
+    </div>
+</div>
         <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>

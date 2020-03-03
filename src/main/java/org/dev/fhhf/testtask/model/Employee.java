@@ -48,6 +48,13 @@ public class Employee implements Serializable {
         this.empActive = empActive;
     }
 
+    public Employee(Integer empId, String empName, Boolean empActive, Department department) {
+        this.empId = empId;
+        this.empName = empName;
+        this.empActive = empActive;
+        this.department = department;
+    }
+
     public Integer getEmpId() {
         return empId;
     }

@@ -17,6 +17,8 @@ function loadEventListeners(){
 
 function loadTable(){
     $('#table').load('/home/page/' + page + '/' + document.getElementById('size').value);
+    $('#form').load('/home/edit/0');
+    $('#empDetails').load('/home/details/0');
 }
 
 function showDetails(e){
