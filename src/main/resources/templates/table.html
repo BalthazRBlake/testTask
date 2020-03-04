@@ -2,41 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-
     <section th:fragment="empList">
 
-        <ul id="menu">
-            <th:block th:each = "page : ${pages}">
-                <li style="display: inline">
-                    <a th:href="@{/home/page/{page}(page=${page})}" th:text = "${page}" class="currentPage"></a>
-                </li>
-            </th:block>
-        </ul>
+        <!--div class="row">
+            <div class="col-md-8"-->
+                <nav aria-label="Page navigation">
+                    <ul id="menu" class="pagination pagination-sm justify-content-center">
+                        <!--li class="page-item">
+                            <a href="#" aria-label="Previous" class="page-link">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li-->
+                        <th:block th:each = "page : ${pages}">
+                            <li class="page-item">
+                                <a th:href="@{/home/page/{page}(page=${page})}"
+                                   th:text = "${page}" class="currentPage page-link">
+                                </a>
+                            </li>
+                        </th:block>
+                        <!--li class="page-item">
+                            <a href="#" aria-label="Next" class="page-link">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li-->
+                    </ul>
+                </nav>
+            <!--/div>
+        </div-->
 
-        <table th:Object="${employees}" border="1">
-            <tr>
-                <th></th>
-                <th></th>
-                <th>empId</th>
-                <th>empName</th>
-                <th>empActive</th>
-                <th>empDepartment</th>
-                <th></th>
-            </tr>
-            <th:block th:each = "employee : ${employees}">
-                <tr>
-                    <td><a th:href="@{/home/details/{empId}(empId=${employee.empId})}" class="viewDetails">View</a></td>
-                    <td><a th:href="@{/home/edit/{empId}(empId=${employee.empId})}" class="editEmployee">Edit</a></td>
-                    <td th:text = "${employee.empId}"></td>
-                    <td th:text = "${employee.empName}"></td>
-                    <td th:if="${employee.empActive}">Yes</td>
-                    <td th:if="${!employee.empActive}">No</td>
-                    <td th:text = "${employee.department.dpName}"></td>
-                    <td><a th:href="@{/home/delete/{empId}(empId=${employee.empId})}" class="deleteEmployee">Delete</a></td>
-                </tr>
-            </th:block>
-        </table>
-
+        <!--div class="row">
+            <div class="col-md-8"-->
+                <div class="table-responsive">
+                    <table th:Object="${employees}" class="table table-sm table-hover">
+                        <caption>List of employees</caption>
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col">empId</th>
+                                <th scope="col">empName</th>
+                                <th scope="col">empActive</th>
+                                <th scope="col">empDepartment</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <th:block th:each = "employee : ${employees}">
+                                <tr>
+                                    <td><a th:href="@{/home/details/{empId}(empId=${employee.empId})}"
+                                           class="viewDetails">View</a></td>
+                                    <td><a th:href="@{/home/edit/{empId}(empId=${employee.empId})}"
+                                           class="editEmployee">Edit</a></td>
+                                    <th scope="row" th:text = "${employee.empId}"></th>
+                                    <td th:text = "${employee.empName}"></td>
+                                    <td th:if="${employee.empActive}">Yes</td>
+                                    <td th:if="${!employee.empActive}" class="bg-danger">No</td>
+                                    <td th:text = "${employee.department.dpName}"></td>
+                                    <td><a th:href="@{/home/delete/{empId}(empId=${employee.empId})}"
+                                           class="deleteEmployee">Delete</a></td>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            <!--/div>
+        </div-->
     </section>
 </body>
 </html>

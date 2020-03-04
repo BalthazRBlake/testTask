@@ -3,13 +3,13 @@
 
 <body>
     <section th:fragment="details">
-        <table>
+        <table class="table">
             <tr>
-                <td>Id: <label th:text="${empDetails.empId}"></label>, </td>
-                <td>Name: <label th:text="${empDetails.empName}"></label>, </td>
+                <td>Id: <label th:text="${empDetails.empId}"></label></td>
+                <td>Name: <label th:text="${empDetails.empName}"></label></td>
                 <td>Active:
                     <label th:if="${empDetails.empActive}">Yes</label>
-                    <label th:if="${!empDetails.empActive}">No</label>,
+                    <label th:if="${!empDetails.empActive}">No</label>
                 </td>
                 <td>Department: <label th:text="${empDetails.department.dpName}"></label></td>
             </tr>

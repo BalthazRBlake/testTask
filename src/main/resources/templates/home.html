@@ -9,83 +9,95 @@
 
     <title>FHHF :: TestTask</title>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" />
 </head>
 
 <body>
 
-        <h1>Single Page Application Employees</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">FHHF</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <h4>Grid view:</h4>
-        <section id="empList">
-            <div id="table"></div>
-        </section>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+        <form id="searchName" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Search" id="nameSearch">
+            <button class="btn btn-outline-info my-2 my-sm-0 searchEmp" type="submit">Search</button>
+            <button class="btn btn-outline-info my-2 my-sm-0 reset" type="submit">Reset</button>
+        </form>
+    </div>
+</nav>
 
-        <span>Amount of results:</span>
-        <select id="size">
-            <option value="10" class="getSize">10</option>
-            <option value="25" class="getSize">25</option>
-            <option value="50" class="getSize">50</option>
-            <option value="100" class="getSize">100</option>
-        </select>
+    <div class="container-fluid">
+        <div class="container">
+            <br/>
+            <blockquote class="blockquote text-center">
+            <h1>Single Page Application Employees</h1>
+            </blockquote>
+            <br/>
 
+            <div class="row">
+                <div class="col-md-7">
+                    <h5 class="text-muted">Grid view: </h5>
+                    <section id="empList">
 
-        <h4>Employee Details:</h4>
-        <section id="empDetails">
-            <table>
-                <tr>
-                    <td>Id: , </td>
-                    <td>Name: , </td>
-                    <td>Active: , </td>
-                    <td>Department: </td>
-                </tr>
-            </table>
-        </section>
-
-        <h4>Edit form:</h4>
-        <section id="editEmpDetails">
-            <div id="form">
-            <form id="editEmpForm">
-                <table>
-                    <tr>
-                        <td>empName: <input type="text" id="empNameTxt" required></td>
-                    </tr>
-                    <tr>
-                        <td>empActive: <input type="checkbox" id="empActiveTxt"></td>
-                    </tr>
-                    <tr>
-                        <td>empDepartment:
-                            <select id="dpValue" required>
-                                <option></option>
-                                <option th:each="depart : ${departments}"
-                                        th:value="${depart.dpId}"
-                                        th:text="${depart.dpName}">
-                                </option>
+                        <div class="form-group">
+                            <span class="badge badge-dark">Amount of results: </span>
+                            <select id="size">
+                                <option value="10" class="getSize">10</option>
+                                <option value="25" class="getSize">25</option>
+                                <option value="50" class="getSize">50</option>
+                                <option value="100" class="getSize">100</option>
                             </select>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+                        </div>
+
+                        <div id="table"></div>
+                    </section>
+                </div>
+
+                <div class="col-md-5">
+                    <br/>
+                    <h5 class="blockquote text-right"><a href="/logout">Logout</a></h5>
+                    <br/>
+
+                    <section>
+                        <h6>Employee Details:</h6>
+                        <div id="empDetails"></div>
+                    </section>
+
+                    <section id="editEmpDetails">
+                        <h4>Edit form:</h4>
+                        <div id="form"></div>
+                    </section>
+
+                    <div id="formBtn" class="form-group row">
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn btn-outline-primary btnSave">Update</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn btn-outline-dark btnCancel">Cancel</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn btn-outline-success btnNew">Save New</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </section>
-
-        <span id="formBtn">
-            <input type="submit" value="Save" class="btnSave">
-            <input type="button" value="Cancel" class="btnCancel">
-        </span>
-
-        <h4>Search employee by name:</h4>
-        <section id="searchName">
-            <input type="text" id="nameSearch">
-            <a href="#" class="searchEmp">Search</a>
-            <a href="#" class="reset">Reset</a>
-        </section>
-
-        <h5><a href="/logout">Logout</a></h5>
-
-        <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        </div>
+    </div>
+    <script src="../static/resources/js/app.js" th:src="@{/resources/js/app.js}"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
