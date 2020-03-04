@@ -3,35 +3,45 @@
 
 <body>
     <section th:fragment="form">
-
         <form th:Object="${empEdit}" action="#"
               th:action="@{/home/update/empId}" method="POST" id="editEmpForm">
-            <table>
-                <tr>
-                    <td><input type="hidden" th:field="*{empId}" id="empIdTxt"></td>
-                </tr>
-                <tr>
-                    <td>empName: <input type="text" th:field="*{empName}" id="empNameTxt"></td>
-                    <td th:if="${empNameError}"><span class="hasError">Enter a name</span></td>
-                </tr>
-                <tr>
-                    <td>empActive: <input type="checkbox" th:field="*{empActive}" id="empActiveTxt"></td>
-                </tr>
-                <tr>
-                    <td>empDepartment:
-                        <select th:field="*{department}" id="dpValue" required>
-                            <option th:value="*{department.dpId}"
-                                    th:text="*{department.dpName}"
-                                    selected="selected">
-                            </option>
-                            <option th:each="depart : ${departments}"
-                                    th:value="${depart.dpId}"
-                                    th:text="${depart.dpName}">
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+
+            <input type="hidden" th:field="*{empId}" id="empIdTxt">
+
+            <div class="form-group row">
+                <label for="empNameTxt" class="col-sm-2 col-form-label">empName</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{empName}" class="form-control" id="empNameTxt">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">empActive</div>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input type="checkbox" th:field="*{empActive}" class="form-check-input" id="empActiveTxt">
+                        <!--label class="form-check-label" for="empActiveTxt">
+                            Example checkbox
+                        </label-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                    <label class="col-sm-4" for="dpValue">empDepartment</label>
+
+                    <select th:field="*{department}" class="custom-select col-sm-7" id="dpValue">
+                        <option th:value="*{department.dpId}"
+                                th:text="*{department.dpName}"
+                                selected="selected">
+                        </option>
+                        <option th:each="depart : ${departments}"
+                                th:value="${depart.dpId}"
+                                th:text="${depart.dpName}">
+                        </option>
+                    </select>
+            </div>
+
         </form>
     </section>
 </body>
