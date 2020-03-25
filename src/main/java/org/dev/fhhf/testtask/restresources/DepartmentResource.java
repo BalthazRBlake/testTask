@@ -22,14 +22,14 @@ public class DepartmentResource {
 
     @PostMapping("/")
     public ResponseEntity<Department> createDepartment(@RequestBody Department department){
-        //If should process then check unique dpName
+
         departmentService.createDepartment(department);
         return ResponseEntity.ok(department);
     }
 
     @PutMapping("/{dpId}")
     public ResponseEntity<Department> updateDepartment(@PathVariable("dpId") int dpId, @RequestBody Department department){
-        //Process necessary fields if required
+
         departmentService.updateDepartment(department);
         return ResponseEntity.ok(department);
     }

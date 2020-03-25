@@ -1,6 +1,6 @@
 package org.dev.fhhf.testtask.config;
 
-import org.dev.fhhf.testtask.repo.EmployeeDaoImpl;
+import org.dev.fhhf.testtask.repository.EmployeeDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

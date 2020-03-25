@@ -1,7 +1,7 @@
 package org.dev.fhhf.testtask.service;
 
 import org.dev.fhhf.testtask.model.Employee;
-import org.dev.fhhf.testtask.repo.EmployeeDao;
+import org.dev.fhhf.testtask.repository.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

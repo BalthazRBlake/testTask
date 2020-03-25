@@ -54,31 +54,17 @@ public class SpaBean {
     @GetMapping("/home/details/{empId}")
     public String viewEmployeeDetails(@PathVariable("empId") int empId, Model model){
 
-        Employee empDetails;
-
-        try {
-            empDetails = employeeService.getEmployeeById(empId);
-        } catch (Throwable t){
-            empDetails = new Employee(0,"NA",false, new Department(0));
-        }
+        Employee empDetails = employeeService.getEmployeeById(empId);
         model.addAttribute("empDetails", empDetails);
-
         return "empDetails :: details";
     }
 
     @GetMapping("/home/edit/{empId}")
     public String initEditForm(@PathVariable("empId") int empId, Model model){
 
-        Employee employee;
-
-        try {
-            employee = employeeService.getEmployeeById(empId);
-        } catch (Throwable t){
-            employee = new Employee(0,"",false, new Department(0));
-        }
+        Employee employee = employeeService.getEmployeeById(empId);
         model.addAttribute("empEdit", employee);
         model.addAttribute("departments", departmentService.getAllDepartments());
-
         return "editForm :: form";
     }
 

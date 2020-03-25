@@ -1,4 +1,4 @@
-package org.dev.fhhf.testtask.repo;
+package org.dev.fhhf.testtask.repository;
 
 import org.dev.fhhf.testtask.model.Department;
 import org.springframework.stereotype.Repository;
