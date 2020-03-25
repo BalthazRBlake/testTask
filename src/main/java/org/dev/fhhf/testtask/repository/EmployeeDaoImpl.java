@@ -1,4 +1,4 @@
-package org.dev.fhhf.testtask.repo;
+package org.dev.fhhf.testtask.repository;
 
 import org.dev.fhhf.testtask.model.Employee;
 import org.springframework.stereotype.Repository;
@@ -33,8 +33,8 @@ public class EmployeeDaoImpl  implements  EmployeeDao{
         CriteriaQuery<Employee> select = criteriaQuery.select(from);
 
         TypedQuery<Employee> typedQuery = em.createQuery(select);
-        typedQuery.setFirstResult((page - 1) * size);
-        typedQuery.setMaxResults(size);
+        typedQuery.setFirstResult( (page - 1) * size );
+        typedQuery.setMaxResults( size );
         List<Employee> paginatedEmployees = typedQuery.getResultList();
 
         return paginatedEmployees;
@@ -49,6 +49,7 @@ public class EmployeeDaoImpl  implements  EmployeeDao{
         CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
         countQuery.select(criteriaBuilder.count(countQuery.from(Employee.class)));
         Long count = em.createQuery(countQuery).getSingleResult();
+
         return count;
     }
 

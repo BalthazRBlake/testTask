@@ -1,7 +1,7 @@
 package org.dev.fhhf.testtask.service;
 
 import org.dev.fhhf.testtask.model.Department;
-import org.dev.fhhf.testtask.repo.DepartmentDao;
+import org.dev.fhhf.testtask.repository.DepartmentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

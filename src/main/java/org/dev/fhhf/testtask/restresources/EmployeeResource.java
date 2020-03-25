@@ -38,23 +38,6 @@ public class EmployeeResource {
     @PostMapping("/")
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
 
-        if(employee.getEmpName() == null || employee.getEmpActive() == null){
-            return ResponseEntity.unprocessableEntity()
-                    .eTag("empName and empActive can not be empty")
-                    .body(employee);
-        }
-
-        try{
-            int dpId = employee.getDepartment().getDpId();
-            Department department = departmentService.getDepartmentById(dpId);
-            employee.setDepartment(department);
-        }
-        catch (Throwable t){
-            return ResponseEntity.notFound()
-                    .eTag("Department Id not found")
-                    .build();
-        }
-
         employeeService.createEmployee(employee);
 
         return ResponseEntity.ok(employee);
@@ -62,32 +45,6 @@ public class EmployeeResource {
 
     @PutMapping("/{empId}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable("empId") int empId, @RequestBody Employee employee){
-
-        try{
-            employeeService.getEmployeeById(empId);
-            employee.setEmpId(empId);
-        }catch (Throwable t){
-            return ResponseEntity.notFound()
-                    .eTag("Employee Id not found")
-                    .build();
-        }
-
-        if(employee.getEmpName() == null || employee.getEmpActive() == null){
-            return ResponseEntity.unprocessableEntity()
-                    .eTag("empName and empActive can not be empty")
-                    .body(employee);
-        }
-
-        try{
-            int dpId = employee.getDepartment().getDpId();
-            Department department = departmentService.getDepartmentById(dpId);
-            employee.setDepartment(department);
-        }
-        catch (Throwable t){
-            return ResponseEntity.notFound()
-                    .eTag("Department Id not found")
-                    .build();
-        }
 
         employeeService.updateEmployee(employee);
 
